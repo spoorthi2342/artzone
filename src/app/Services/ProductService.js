@@ -1,8 +1,11 @@
 import { Stripe } from "../utils/Stripe"; 
 
 export const getProducts = async (limit) => {
+    let products={
+        data:[]
+    }
     try {
-        const products = await Stripe.products.list({ limit: limit || 10 , expand:['data.default_price']}); 
+         products = await Stripe.products.list({ limit: limit || 10 , expand:['data.default_price']}); 
         
         console.log(JSON.stringify(products, null, 2));
         return products;
@@ -12,8 +15,9 @@ export const getProducts = async (limit) => {
     }
 };
 export const getProductById = async (productId) => {
+    let product=null
     try {
-        const product = await Stripe.products.retrieve(productId,{expand:['default_price']}); 
+        product = await Stripe.products.retrieve(productId,{expand:['default_price']}); 
         
         console.log(JSON.stringify(product, null, 2));
         return product;

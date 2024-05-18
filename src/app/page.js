@@ -13,7 +13,7 @@ const Home = async()=>{
       <div className="m-9 mr-7 flex justify-between flex-wrap  gap-4 ">
       
        {Products.data.map(item=>
-        <ProductCard item={item}/>
+        <ProductCard  key={item.id}item={item}  />
        )}
       
 

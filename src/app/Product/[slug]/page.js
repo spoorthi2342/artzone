@@ -3,6 +3,8 @@ import { CheckIcon, LinkIcon } from '@heroicons/react/24/solid';
 import Addtocart from '@/app/components/Addtocart';
 import { getProductById ,getProducts} from '@/app/Services/ProductService';
 import { formatAmount } from '@/app/utils/Stripe';
+import Image from 'next/image';
+import { notFound } from 'next/navigation';
 export async function generateStaticParams() {
 //   const posts = await fetch('https://.../posts').then((res) => res.json())
  
@@ -19,6 +21,9 @@ return slugs
 
 export async function generatemetadata ({params: { slug }}){
   const product=await getProductById(slug)
+  if(!product){
+    notFound
+  }
   return{
     title:`Art Zone | ${product.name}`
 
@@ -35,7 +40,12 @@ const Page = async ({ params: { slug } }) => {
     <div className='m-4 px-9'>
       <div className='flex justify-around items-center flex-wrap'>
         <div className='w-80 h-80 py-9'>
-          <img src={product.images[0]} alt={product.name} />
+          <Image 
+          src={product.images[0]}
+          priority={true}
+           alt={product.name}
+           width={320} 
+           height={320}/>
           <p className='mt-4 text-l px-0'>
             {product.description}
           </p>

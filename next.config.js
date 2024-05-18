@@ -3,8 +3,20 @@
 /**
  *  @type {import('next').NextConfig} 
  */
-module.exports={
-    output :'export',
-}
+
+    // output :'export',
+    // images:{unoptimized:true}
+    module.exports = {
+        images: {
+          remotePatterns: [
+            {
+              protocol: 'https',
+              hostname: 'files.stripe.com',
+              
+            },
+          ],
+        },
+      }
+
    
  
